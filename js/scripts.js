@@ -1,7 +1,7 @@
 /*global $*/
 
 // Make an AJAX request and add a table with results on a given section.
-load_api_table('GET', 'https://gocrypto-fees.herokuapp.com/api/v1', 'fees-section', ['ticker', 'binance_fee_usd', 'bittrex_fee_usd', 'poloniex_fee_usd']);
+load_api_table('GET', 'https://gocrypto-fees.herokuapp.com/api/v1', 'fees-table', ['ticker', 'binance_fee_usd', 'bittrex_fee_usd', 'poloniex_fee_usd']);
 
 
 /* Fill a table from an AJAX request on a JSON API
@@ -10,12 +10,12 @@ load_api_table('GET', 'https://gocrypto-fees.herokuapp.com/api/v1', 'fees-sectio
    @section_id: Section ID in target DOM
    @keys: List of dictionary keys to print in table
 */
-function load_api_table(method, api_url, section_id, keys) {
+function load_api_table(method, api_url, table_id, keys) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var html = jsonlist2table(this.responseText, keys);
-            document.getElementById(section_id).innerHTML = html;
+            document.getElementById(table_id).innerHTML = html;
             
             // Adding Bootstrap format table
             custom_format_table('#fees-section table');
@@ -68,11 +68,11 @@ function custom_format_table (table_selector) {
         if ( $(this).html() == 'ticker' )
             $(this).html('Ticker');
         else if ( $(this).html() == 'binance_fee_usd' )
-            $(this).html('Binance Fee (USD)');
+            $(this).html('Binance');
         else if ( $(this).html() == 'bittrex_fee_usd' )
-            $(this).html('Bittrex Fee (USD)');
+            $(this).html('Bittrex');
         else if ( $(this).html() == 'poloniex_fee_usd' )
-            $(this).html('Poloniex Fee (USD)');
+            $(this).html('Poloniex');
     } )
     
 
@@ -81,7 +81,7 @@ function custom_format_table (table_selector) {
   	    search: true,
   	    searchText: '',
   	    pagination: true,
-  	    pageSize: 100
+  	    pageSize: 25
     });
     $.extend($.fn.bootstrapTable.columnDefaults, {
   	    sortable: true

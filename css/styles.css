@@ -1,3 +1,6 @@
+h1 {
+    margin-top: 20px;
+}
 .usd::before {
     content: '$';
 }

@@ -47,8 +47,10 @@ function jsonlist2table (list, keys) {
             var key = keys[j];
             
             // Adding '$' to dollar fields
-            if (j != 0 && myObj[i][key] != '-') 
+            if (j != 0 && myObj[i][key] != null) 
                 html += '<td class="usd">' + myObj[i][key] + '</td>';
+            else if (myObj[i][key] == null)
+                html += '<td>' + 'n/a' + '</td>';
             else
                 html += '<td>' + myObj[i][key] + '</td>';
         }

@@ -1,7 +1,7 @@
 /*global $*/
 
 // Make an AJAX request and add a table with results on a given section.
-load_api_table('GET', 'https://gocrypto-fees.herokuapp.com/api/v1', 'fees-table', ['ticker', 'binance_fee_usd', 'bittrex_fee_usd', 'poloniex_fee_usd']);
+load_api_table('GET', 'https://gocrypto-fees.herokuapp.com/api/v1', 'fees-table', ['rank', 'ticker', 'binance_fee_usd', 'bittrex_fee_usd', 'poloniex_fee_usd']);
 
 
 /* Fill a table from an AJAX request on a JSON API
@@ -47,8 +47,10 @@ function jsonlist2table (list, keys) {
             var key = keys[j];
             
             // Adding '$' to dollar fields
-            if (j != 0 && myObj[i][key] != null) 
+            if (j != 0 && j != 1 && myObj[i][key] != null) 
                 html += '<td class="usd">' + myObj[i][key] + '</td>';
+            else if (j == 0)
+                html += '<td class="rank">' + myObj[i][key] + '</td>';
             else if (myObj[i][key] == null)
                 html += '<td>' + 'n/a' + '</td>';
             else
@@ -69,6 +71,8 @@ function custom_format_table (table_selector) {
     $("#fees-section" + ' thead th').each(function() {
         if ( $(this).html() == 'ticker' )
             $(this).html('Ticker');
+        else if ( $(this).html() == 'rank' )
+            $(this).html('Rank');
         else if ( $(this).html() == 'binance_fee_usd' )
             $(this).html('Binance');
         else if ( $(this).html() == 'bittrex_fee_usd' )

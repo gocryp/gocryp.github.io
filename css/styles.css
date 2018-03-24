@@ -4,3 +4,6 @@ h1 {
 .usd::before {
     content: '$';
 }
+.rank::before {
+    content: '#';
+}

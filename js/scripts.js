@@ -1,7 +1,7 @@
 /*global $*/
 
 // Make an AJAX request and add a table with results on a given section.
-load_api_table('GET', 'https://gocrypto-fees.herokuapp.com/api/v1', 'fees-table', ['rank', 'ticker', 'binance_fee_usd', 'bittrex_fee_usd', 'poloniex_fee_usd']);
+load_api_table('GET', 'https://gocrypto-api.herokuapp.com/coins', 'fees-table', ['rank', 'ticker', 'binance_fee_usd', 'bittrex_fee_usd', 'poloniex_fee_usd']);
 
 
 /* Fill a table from an AJAX request on a JSON API

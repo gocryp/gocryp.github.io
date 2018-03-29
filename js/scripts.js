@@ -18,7 +18,7 @@ function load_api_table(method, api_url, table_id, keys) {
             document.getElementById(table_id).innerHTML = html;
             
             // Adding Bootstrap format table
-            custom_format_table('#fees-section table');
+            custom_format_table('#fees-table');
         }
     };
     xhttp.open(method, api_url, true);
@@ -68,7 +68,7 @@ function jsonlist2table (list, keys) {
 /* Custom format table using Bootstrap table */
 function custom_format_table (table_selector) {
     
-    $("#fees-section" + ' thead th').each(function() {
+    $(table_selector + ' thead th').each(function() {
         if ( $(this).html() == 'ticker' )
             $(this).html('Ticker');
         else if ( $(this).html() == 'rank' )
@@ -79,7 +79,17 @@ function custom_format_table (table_selector) {
             $(this).html('Bittrex');
         else if ( $(this).html() == 'poloniex_fee_usd' )
             $(this).html('Poloniex');
-    } )
+    });
+    
+    // Custom color depending on withdrawal fees
+    $(table_selector + ' tbody tr td.usd').each(function() {
+        if ($(this).html() < 1.0)
+            $(this).addClass('table-success');
+        else if ($(this).html() < 4.0)
+            $(this).addClass('table-warning');
+        else if ($(this).html() >= 4.0)
+            $(this).addClass('table-danger');
+    });
     
 
     $.extend($.fn.bootstrapTable.defaults, {
@@ -87,7 +97,7 @@ function custom_format_table (table_selector) {
   	    search: true,
   	    searchText: '',
   	    pagination: true,
-  	    pageSize: 25
+  	    pageSize: 100
     });
     $.extend($.fn.bootstrapTable.columnDefaults, {
   	    sortable: true

@@ -1,7 +1,7 @@
 /*global $*/
 
 // Make an AJAX request and add a table with results on a given section.
-load_api_table('GET', 'https://gocrypto-api.herokuapp.com/coins', 'fees-table', ['rank', 'ticker', 'binance_fee_usd', 'bittrex_fee_usd', 'poloniex_fee_usd']);
+load_api_table('GET', 'https://gocrypto-api.herokuapp.com/coins', 'fees-table', ['rank', 'ticker', 'kraken_fee_usd', 'binance_fee_usd', 'bittrex_fee_usd', 'poloniex_fee_usd', 'kucoin_fee_usd']);
 
 
 /* Fill a table from an AJAX request on a JSON API
@@ -73,12 +73,16 @@ function custom_format_table (table_selector) {
             $(this).html('Ticker');
         else if ( $(this).html() == 'rank' )
             $(this).html('Rank');
+        else if ( $(this).html() == 'kraken_fee_usd' )
+            $(this).html('Kraken');
         else if ( $(this).html() == 'binance_fee_usd' )
             $(this).html('Binance');
         else if ( $(this).html() == 'bittrex_fee_usd' )
             $(this).html('Bittrex');
         else if ( $(this).html() == 'poloniex_fee_usd' )
             $(this).html('Poloniex');
+        else if ( $(this).html() == 'kucoin_fee_usd' )
+            $(this).html('Kucoin');
     });
     
     // Custom color depending on withdrawal fees
